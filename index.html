@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pet Care – Bienestar y Adiestramiento</title>
+  <meta name="description" content="Etología y adiestramiento canino. Cuidados por especie, planes alimenticios, emergencias y contacto de veterinarias." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --cream: #FFF7EC;
+      --sand: #F7E6C8;
+      --peach: #FBD2C5;
+      --mint: #D7F2E3;
+      --lilac: #E8E4FB;
+      --brown: #6B5E53;
+      --ink: #2B2A2A;
+      --accent: #FF9F68;
+      --accent-2: #8CC9A6;
+      --radius-xl: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:var(--cream)}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    /* NAV */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter: saturate(120%) blur(8px); background:rgba(255,247,236,.7); border-bottom:1px solid rgba(0,0,0,.05)}
+    .nav-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:1150px; margin:0 auto; padding:14px 18px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700}
+    .brand .logo{width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg, var(--peach), var(--mint)); display:grid; place-items:center; box-shadow: var(--shadow)}
+    .brand .logo svg{width:22px; height:22px}
+    .nav ul{display:flex; gap:14px; list-style:none; margin:0; padding:0; flex-wrap:wrap}
+    .nav a.btn{padding:10px 14px; border-radius:12px; background:var(--accent); color:#fff; font-weight:600; box-shadow: var(--shadow)}
+    .nav a.link{padding:8px 10px; border-radius:10px}
+    .nav a.link:hover{background:rgba(0,0,0,.06)}
+
+    /* HERO */
+    .hero{max-width:1150px; margin:0 auto; padding:38px 18px 28px}
+    .hero-inner{display:grid; grid-template-columns: 1.2fr 1fr; gap:28px; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:var(--mint); border-radius:999px; font-weight:600}
+    .title{font-size: clamp(32px, 4.5vw, 56px); line-height:1.05; margin:14px 0 10px}
+    .subtitle{font-size:clamp(16px, 2.2vw, 20px); color:#4a4949; margin:0 0 18px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{border:0; padding:12px 16px; border-radius:14px; font-weight:700; cursor:pointer; box-shadow: var(--shadow)}
+    .btn.primary{background:var(--accent); color:#fff}
+    .btn.secondary{background:#fff; color:var(--ink)}
+    .hero-card{background: linear-gradient(180deg, var(--sand), #fff); border-radius: var(--radius-xl); padding:18px; box-shadow: var(--shadow)}
+
+    /* SECTIONS */
+    .section{max-width:1150px; margin:0 auto; padding:42px 18px}
+    .section h2{font-size: clamp(26px, 3.6vw, 38px); margin:0 0 6px}
+    .section p.lead{color:#4a4949; margin:0 0 22px}
+
+    /* SPECIES GRID */
+    .species-controls{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 18px}
+    .chip{padding:8px 12px; background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:999px; cursor:pointer; font-weight:600}
+    .chip.active{background:var(--lilac)}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
+    .card{background:#fff; border-radius:var(--radius-xl); padding:16px; box-shadow: var(--shadow); display:flex; gap:14px}
+    .card-illust{flex:0 0 74px; height:74px; border-radius:16px; background:linear-gradient(135deg, var(--peach), var(--lilac)); display:grid; place-items:center}
+    .card h3{margin:6px 0 6px; font-size:20px}
+    .card p{margin:0; color:#4a4949; font-size:15px}
+
+    /* FEATURES */
+    .features{display:grid; grid-template-columns: repeat(4, 1fr); gap:16px}
+    .feature{background:#fff; padding:18px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
+    .feature h3{margin:8px 0 6px}
+    .feature p{margin:0; color:#4a4949}
+
+    /* EMERGENCY */
+    .emergency{display:grid; grid-template-columns: 1.1fr 1fr; gap:18px}
+    .emergency .box{background:#fff; padding:18px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
+
+    /* CONTACT */
+    .contact-cards{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
+    .contact-card{background:#fff; padding:18px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
+    .map{border:0; width:100%; height:260px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
+
+    /* FOOTER */
+    footer{padding:28px 18px 48px; background: #fff; border-top: 1px solid rgba(0,0,0,.06)}
+    .foot{max-width:1150px; margin:0 auto; display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center}
+
+    /* UTIL */
+    .muted{color:#6b6a6a}
+    .tag{display:inline-block; background:var(--mint); padding:6px 10px; border-radius:10px; font-weight:600}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; background: #f2efe9; border-radius:8px; padding:2px 6px}
+    .spacer{height:4px}
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns: 1fr}
+      .features{grid-template-columns: repeat(2, 1fr)}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .contact-cards{grid-template-columns: 1fr}
+      .emergency{grid-template-columns: 1fr}
+    }
+    @media (max-width: 560px){
+      .grid{grid-template-columns: 1fr}
+      .features{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- Huellita SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 22c3 0 7-2 7-5.5S15 12 12 12s-7 2.5-7 4.5S9 22 12 22Z" fill="currentColor" opacity=".25"/><circle cx="6.5" cy="7" r="2.4" fill="currentColor"/><circle cx="12" cy="5.5" r="2.6" fill="currentColor"/><circle cx="17.5" cy="7" r="2.4" fill="currentColor"/></svg>
+        </div>
+        <span>Pet Care</span>
+      </div>
+      <ul>
+        <li><a class="link" href="#inicio">Inicio</a></li>
+        <li><a class="link" href="#especies">Cuidados</a></li>
+        <li><a class="link" href="#funciones">Funciones</a></li>
+        <li><a class="link" href="#emergencias">Emergencias</a></li>
+        <li><a class="link" href="#contacto">Contacto</a></li>
+        <li><a class="btn" href="#descarga">Descargar app</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="inicio" class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="badge">Etología & Adiestramiento • Siempre en positivo</span>
+        <h1 class="title">Cuida a tu mascota con <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent">nuestro sitio web</span></h1>
+        <p class="subtitle">Rutinas fáciles, planes alimenticios personalizados, recordatorios y primeros auxilios. Todo en un lugar, con un diseño amable en tonos crema y pastel.</p>
+        <div class="cta">
+          <a class="btn primary" href="#funciones">Ver funciones</a>
+          <a class="btn secondary" href="#especies">Cuidados por especie</a>
+        </div>
+        <p class="muted" style="margin-top:12px">Ignacia Silva • Kayla Tala • Emilia Ceballos</p>
+      </div>
+      <div class="hero-card" aria-label="Ilustración de mascotas">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración de animales felices">
+          <rect x="0" y="0" width="600" height="400" rx="18" fill="#FFF"/>
+          <circle cx="120" cy="250" r="70" fill="#FBD2C5"/>
+          <circle cx="300" cy="180" r="90" fill="#D7F2E3"/>
+          <circle cx="480" cy="250" r="70" fill="#E8E4FB"/>
+          <!-- Perro sencillo -->
+          <g transform="translate(80,210)">
+            <rect x="0" y="20" width="90" height="40" rx="20" fill="#6B5E53"/>
+            <circle cx="75" cy="40" r="25" fill="#6B5E53"/>
+            <circle cx="88" cy="38" r="4" fill="#fff"/>
+          </g>
+          <!-- Gato simple -->
+          <g transform="translate(260,130)">
+            <ellipse cx="0" cy="30" rx="42" ry="28" fill="#7a6a60"/>
+            <polygon points="-20,10 -8,-10 0,10" fill="#7a6a60"/>
+            <polygon points="20,10 8,-10 0,10" fill="#7a6a60"/>
+            <circle cx="-8" cy="30" r="3" fill="#fff"/>
+            <circle cx="8" cy="30" r="3" fill="#fff"/>
+          </g>
+          <!-- Ave simple -->
+          <g transform="translate(460,210)">
+            <ellipse cx="0" cy="0" rx="26" ry="20" fill="#8CC9A6"/>
+            <polygon points="26,0 40,6 26,12" fill="#6B5E53"/>
+            <circle cx="10" cy="-4" r="3" fill="#2B2A2A"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- ESPECIES -->
+  <section id="especies" class="section">
+    <h2>Cuidados por especie</h2>
+    <p class="lead">Recomendaciones esenciales para que tu compañero viva feliz: espacio, higiene, juego, alimentación y seguridad.</p>
+
+    <div class="species-controls" role="tablist" aria-label="Filtrar por especie">
+      <button class="chip active" data-filter="all">Todas</button>
+      <button class="chip" data-filter="perros">Perros</button>
+      <button class="chip" data-filter="felinos">Felinos</button>
+      <button class="chip" data-filter="roedores">Roedores</button>
+      <button class="chip" data-filter="aves">Aves</button>
+      <button class="chip" data-filter="peces">Peces</button>
+      <button class="chip" data-filter="reptiles">Reptiles</button>
+      <button class="chip" data-filter="anfibios">Anfibios</button>
+    </div>
+
+    <div class="grid" id="speciesGrid" aria-live="polite">
+      <!-- Perros -->
+      <article class="card" data-type="perros">
+        <div class="card-illust" aria-hidden="true">🐶</div>
+        <div>
+          <h3>Perros</h3>
+          <p>Espacio seguro, cama cómoda, agua fresca y paseos diarios para ejercitarse. Refuerzo positivo y constancia.</p>
+        </div>
+      </article>
+      <!-- Felinos -->
+      <article class="card" data-type="felinos">
+        <div class="card-illust" aria-hidden="true">🐱</div>
+        <div>
+          <h3>Felinos</h3>
+          <p>Rascadores, caja de arena limpia, rincones tranquilos y juguetes para estimular su curiosidad.</p>
+        </div>
+      </article>
+      <!-- Roedores -->
+      <article class="card" data-type="roedores">
+        <div class="card-illust" aria-hidden="true">🐭</div>
+        <div>
+          <h3>Roedores</h3>
+          <p>Jaula amplia con sustrato limpio, materiales para roer, escondites y rueda de ejercicio.</p>
+        </div>
+      </article>
+      <!-- Aves -->
+      <article class="card" data-type="aves">
+        <div class="card-illust" aria-hidden="true">🕊️</div>
+        <div>
+          <h3>Aves</h3>
+          <p>Jaula espaciosa con perchas y juguetes, agua y comida fresca, lejos de corrientes de aire.</p>
+        </div>
+      </article>
+      <!-- Peces -->
+      <article class="card" data-type="peces">
+        <div class="card-illust" aria-hidden="true">🐠</div>
+        <div>
+          <h3>Peces</h3>
+          <p>Acuario limpio con filtración, temperatura controlada, escondites y alimentación moderada.</p>
+        </div>
+      </article>
+      <!-- Reptiles -->
+      <article class="card" data-type="reptiles">
+        <div class="card-illust" aria-hidden="true">🦎</div>
+        <div>
+          <h3>Reptiles</h3>
+          <p>Terrario ventilado, temperatura y humedad controladas, sustrato adecuado y ramas o cuevas.</p>
+        </div>
+      </article>
+      <!-- Anfibios -->
+      <article class="card" data-type="anfibios">
+        <div class="card-illust" aria-hidden="true">🐸</div>
+        <div>
+          <h3>Anfibios</h3>
+          <p>Ambiente con humedad adecuada, refugios y agua limpia. Evitar productos químicos cerca del hábitat.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FUNCIONES -->
+  <section id="funciones" class="section" aria-labelledby="funciones-title">
+    <h2 id="funciones-title">Funciones de la app</h2>
+    <p class="lead">Pensada para el bienestar físico y emocional, y para que disfrutes más con tu mascota.</p>
+
+    <div class="features">
+      <div class="feature">
+        <span class="tag">Objetivo</span>
+        <h3>Mejorar la actitud</h3>
+        <p>Rutinas graduales y refuerzo positivo. Seguimiento de avances y metas semanales.</p>
+      </div>
+      <div class="feature">
+        <span class="tag">Plan alimenticio</span>
+        <h3>Nutrición personalizada</h3>
+        <p>Porciones y horarios según edad, tamaño y actividad. Listas de compras y recordatorios.</p>
+      </div>
+      <div class="feature">
+        <span class="tag">Necesidades</span>
+        <h3>Recordatorios diarios</h3>
+        <p>Paseos, hidratación, higiene, juego y visitas al veterinario con alertas amigables.</p>
+      </div>
+      <div class="feature">
+        <span class="tag">Casos de riesgo</span>
+        <h3>Condiciones especiales</h3>
+        <p>Registro de síntomas, medicación y alertas para alergias, epilepsia u otras condiciones.</p>
+      </div>
+    </div>
+
+    <div id="descarga" class="section" style="padding:18px 0 0">
+      <div class="hero-card">
+        <h3>Descarga la app</h3>
+        <p>Guarda este sitio como <span class="kbd">PWA</span> o instala nuestra app cuando esté disponible. Por ahora, añade un acceso directo a tu pantalla de inicio.</p>
+        <div class="cta">
+          <button class="btn primary" id="installBtn" disabled>Instalar (próximamente)</button>
+          <a class="btn secondary" href="#contacto">Recibir enlace</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCIAS -->
+  <section id="emergencias" class="section">
+    <h2>¿Cómo actuar en caso de emergencia?</h2>
+    <p class="lead">La app te muestra la veterinaria más cercana y primeros auxilios para estabilizar a tu mascota mientras recibes atención.</p>
+    <div class="emergency">
+      <div class="box">
+        <h3>Checklist rápido</h3>
+        <ol>
+          <li>Mantén la calma y evita que tu mascota se mueva en exceso.</li>
+          <li>Revisa respiración, pulso y sangrado visible.</li>
+          <li>Aplica presión suave en heridas para contener el sangrado.</li>
+          <li>No administres fármacos humanos sin indicación veterinaria.</li>
+          <li>Contacta a la veterinaria y dirige tu ruta.</li>
+        </ol>
+        <div class="cta">
+          <button class="btn primary" id="openFirstAid">Primeros auxilios básicos</button>
+          <a class="btn secondary" target="_blank" rel="noopener" href="https://www.openstreetmap.org/directions">Abrir mapa</a>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Veterinarias cercanas</h3>
+        <p class="muted">Este mapa es ilustrativo; se puede integrar con Google Maps, OpenStreetMap o Mapbox.</p>
+        <iframe class="map" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-72.245%2C-39.291%2C-72.200%2C-39.265&amp;layer=mapnik&amp;marker=-39.281%2C-72.220" title="Mapa de Villarrica (referencial)"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <h2>Contacto</h2>
+    <p class="lead">Localización y medios de contacto.</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <h3>Dirección</h3>
+        <p>Anfión Muñoz 635<br/>Villarrica – Chile</p>
+      </div>
+      <div class="contact-card">
+        <h3>Teléfonos</h3>
+        <p>Fijo: 045 2410368<br/>
+        WhatsApp: <a href="https://wa.me/56997006557" target="_blank" rel="noopener">+56 9 9700 6557</a></p>
+      </div>
+      <div class="contact-card">
+        <h3>Email</h3>
+        <p><a href="mailto:contacto@vetaraucania.cl">contacto@vetaraucania.cl</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <p class="muted">© <span id="y"></span> Pet Care · Etología y Adiestramiento · Hecho con cariño 🐾</p>
+      <div>
+        <a class="link" href="#inicio">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL PRIMEROS AUXILIOS -->
+  <dialog id="firstAidModal" style="border:0; border-radius: 16px; padding:0; width:min(680px, 92vw); box-shadow: var(--shadow)">
+    <div style="padding:18px; background:#fff; border-radius:16px">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+        <h3 style="margin:0">Primeros auxilios básicos</h3>
+        <button id="closeModal" class="btn secondary">Cerrar</button>
+      </div>
+      <div class="spacer"></div>
+      <ul style="margin:0 0 8px 18px">
+        <li>Convulsiones: retira objetos alrededor, protege la cabeza, no metas nada en su boca, cronometra el episodio.</li>
+        <li>Envenenamiento: identifica el tóxico si es posible y llama a urgencias; no provoques vómito sin indicación.</li>
+        <li>Golpe de calor: llévalo a la sombra, moja patas y abdomen con agua fresca (no helada), ventila.</li>
+        <li>Asfixia: si tose, permite que intente expulsar; si no respira, RCP para mascotas y acude de inmediato.</li>
+      </ul>
+      <p class="muted" style="margin:8px 0 0">Esta guía no reemplaza la atención profesional.</p>
+    </div>
+  </dialog>
+
+  <script>
+    // Año dinámico
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Filtro de especies
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('#speciesGrid .card');
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      ch.classList.add('active');
+      const f = ch.dataset.filter;
+      cards.forEach(card => {
+        const show = f === 'all' || card.dataset.type === f;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    }));
+
+    // Modal de primeros auxilios
+    const modal = document.getElementById('firstAidModal');
+    document.getElementById('openFirstAid').addEventListener('click', () => modal.showModal());
+    document.getElementById('closeModal').addEventListener('click', () => modal.close());
+
+    // Scroll suave para anclas
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length > 1){
+          const el = document.querySelector(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        }
+      });
+    });
+
+    // Botón de instalar (placeholder)
+    const installBtn = document.getElementById('installBtn');
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.disabled = false;
+    });
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
