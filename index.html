@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pet Care – Bienestar y Adiestramiento</title>
-  <meta name="description" content="Etología y adiestramiento canino. Cuidados por especie, planes alimenticios, emergencias y contacto de veterinarias." />
+  <meta name="description" content="Etología y adiestramiento canino. Cuidados por especie, planes alimenticios, emergencias y contactos de veterinarias." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -23,11 +23,16 @@
       --shadow: 0 10px 30px rgba(0,0,0,.08);
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     html,body{margin:0; padding:0; font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:var(--cream)}
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
+
+    /* Offsets para el nav sticky */
+    header, section{scroll-margin-top:84px;}
+
     /* NAV */
-    .nav{position:sticky; top:0; z-index:50; backdrop-filter: saturate(120%) blur(8px); background:rgba(255,247,236,.7); border-bottom:1px solid rgba(0,0,0,.05)}
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter: saturate(120%) blur(8px); background:rgba(255,247,236,.85); border-bottom:1px solid rgba(0,0,0,.05)}
     .nav-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:1150px; margin:0 auto; padding:14px 18px}
     .brand{display:flex; align-items:center; gap:12px; font-weight:700}
     .brand .logo{width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg, var(--peach), var(--mint)); display:grid; place-items:center; box-shadow: var(--shadow)}
@@ -70,11 +75,17 @@
     .feature h3{margin:8px 0 6px}
     .feature p{margin:0; color:#4a4949}
 
-    /* EMERGENCY */
+    /* EMERGENCIAS */
     .emergency{display:grid; grid-template-columns: 1.1fr 1fr; gap:18px}
     .emergency .box{background:#fff; padding:18px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
+    .emergency-wizard{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .step{display:none}
+    .step.active{display:block}
+    .btn.option{background:#F7E6C8}
+    .result{background:#FBD2C5;padding:16px;border-radius:12px;margin-top:16px}
+    .nav-btns{display:flex;justify-content:space-between;margin-top:20px}
 
-    /* CONTACT */
+    /* CONTACTO */
     .contact-cards{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
     .contact-card{background:#fff; padding:18px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
     .map{border:0; width:100%; height:260px; border-radius:var(--radius-xl); box-shadow: var(--shadow)}
@@ -109,7 +120,6 @@
     <div class="nav-wrap">
       <div class="brand">
         <div class="logo" aria-hidden="true">
-          <!-- Huellita SVG -->
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 22c3 0 7-2 7-5.5S15 12 12 12s-7 2.5-7 4.5S9 22 12 22Z" fill="currentColor" opacity=".25"/><circle cx="6.5" cy="7" r="2.4" fill="currentColor"/><circle cx="12" cy="5.5" r="2.6" fill="currentColor"/><circle cx="17.5" cy="7" r="2.4" fill="currentColor"/></svg>
         </div>
         <span>Pet Care</span>
@@ -144,13 +154,11 @@
           <circle cx="120" cy="250" r="70" fill="#FBD2C5"/>
           <circle cx="300" cy="180" r="90" fill="#D7F2E3"/>
           <circle cx="480" cy="250" r="70" fill="#E8E4FB"/>
-          <!-- Perro sencillo -->
           <g transform="translate(80,210)">
             <rect x="0" y="20" width="90" height="40" rx="20" fill="#6B5E53"/>
             <circle cx="75" cy="40" r="25" fill="#6B5E53"/>
             <circle cx="88" cy="38" r="4" fill="#fff"/>
           </g>
-          <!-- Gato simple -->
           <g transform="translate(260,130)">
             <ellipse cx="0" cy="30" rx="42" ry="28" fill="#7a6a60"/>
             <polygon points="-20,10 -8,-10 0,10" fill="#7a6a60"/>
@@ -158,7 +166,6 @@
             <circle cx="-8" cy="30" r="3" fill="#fff"/>
             <circle cx="8" cy="30" r="3" fill="#fff"/>
           </g>
-          <!-- Ave simple -->
           <g transform="translate(460,210)">
             <ellipse cx="0" cy="0" rx="26" ry="20" fill="#8CC9A6"/>
             <polygon points="26,0 40,6 26,12" fill="#6B5E53"/>
@@ -186,7 +193,6 @@
     </div>
 
     <div class="grid" id="speciesGrid" aria-live="polite">
-      <!-- Perros -->
       <article class="card" data-type="perros">
         <div class="card-illust" aria-hidden="true">🐶</div>
         <div>
@@ -194,7 +200,6 @@
           <p>Espacio seguro, cama cómoda, agua fresca y paseos diarios para ejercitarse. Refuerzo positivo y constancia.</p>
         </div>
       </article>
-      <!-- Felinos -->
       <article class="card" data-type="felinos">
         <div class="card-illust" aria-hidden="true">🐱</div>
         <div>
@@ -202,7 +207,6 @@
           <p>Rascadores, caja de arena limpia, rincones tranquilos y juguetes para estimular su curiosidad.</p>
         </div>
       </article>
-      <!-- Roedores -->
       <article class="card" data-type="roedores">
         <div class="card-illust" aria-hidden="true">🐭</div>
         <div>
@@ -210,7 +214,6 @@
           <p>Jaula amplia con sustrato limpio, materiales para roer, escondites y rueda de ejercicio.</p>
         </div>
       </article>
-      <!-- Aves -->
       <article class="card" data-type="aves">
         <div class="card-illust" aria-hidden="true">🕊️</div>
         <div>
@@ -218,7 +221,6 @@
           <p>Jaula espaciosa con perchas y juguetes, agua y comida fresca, lejos de corrientes de aire.</p>
         </div>
       </article>
-      <!-- Peces -->
       <article class="card" data-type="peces">
         <div class="card-illust" aria-hidden="true">🐠</div>
         <div>
@@ -226,7 +228,6 @@
           <p>Acuario limpio con filtración, temperatura controlada, escondites y alimentación moderada.</p>
         </div>
       </article>
-      <!-- Reptiles -->
       <article class="card" data-type="reptiles">
         <div class="card-illust" aria-hidden="true">🦎</div>
         <div>
@@ -234,7 +235,6 @@
           <p>Terrario ventilado, temperatura y humedad controladas, sustrato adecuado y ramas o cuevas.</p>
         </div>
       </article>
-      <!-- Anfibios -->
       <article class="card" data-type="anfibios">
         <div class="card-illust" aria-hidden="true">🐸</div>
         <div>
@@ -288,25 +288,37 @@
   <!-- EMERGENCIAS -->
   <section id="emergencias" class="section">
     <h2>¿Cómo actuar en caso de emergencia?</h2>
-    <p class="lead">La app te muestra la veterinaria más cercana y primeros auxilios para estabilizar a tu mascota mientras recibes atención.</p>
+    <p class="lead">Te guiamos con primeros auxilios según los síntomas y te abrimos el mapa para encontrar una veterinaria cercana.</p>
+
     <div class="emergency">
+      <!-- Wizard -->
       <div class="box">
-        <h3>Checklist rápido</h3>
-        <ol>
-          <li>Mantén la calma y evita que tu mascota se mueva en exceso.</li>
-          <li>Revisa respiración, pulso y sangrado visible.</li>
-          <li>Aplica presión suave en heridas para contener el sangrado.</li>
-          <li>No administres fármacos humanos sin indicación veterinaria.</li>
-          <li>Contacta a la veterinaria y dirige tu ruta.</li>
-        </ol>
-        <div class="cta">
-          <button class="btn primary" id="openFirstAid">Primeros auxilios básicos</button>
-          <a class="btn secondary" target="_blank" rel="noopener" href="https://www.openstreetmap.org/directions">Abrir mapa</a>
+        <h3>Asistente de primeros auxilios</h3>
+        <div class="emergency-wizard" aria-live="polite">
+          <div class="step active" data-step="1">
+            <p><strong>¿Qué síntoma presenta tu mascota?</strong></p>
+            <div class="cta" style="gap:10px; flex-wrap:wrap">
+              <button class="btn option" data-answer="convulsiones">Convulsiones</button>
+              <button class="btn option" data-answer="golpeCalor">Golpe de calor</button>
+              <button class="btn option" data-answer="envenenamiento">Envenenamiento</button>
+              <button class="btn option" data-answer="sangrado">Herida sangrante</button>
+              <button class="btn option" data-answer="asfixia">Asfixia / atragantamiento</button>
+            </div>
+          </div>
+          <div class="step" data-step="2">
+            <h4>Guía de primeros auxilios</h4>
+            <div id="resultBox" class="result">Selecciona un síntoma para ver la guía.</div>
+            <div class="nav-btns">
+              <button id="backBtn" class="btn secondary">⬅ Volver</button>
+              <a class="btn primary" href="https://www.openstreetmap.org/directions" target="_blank" rel="noopener">Abrir mapa de veterinarias</a>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Mapa / info -->
       <div class="box">
         <h3>Veterinarias cercanas</h3>
-        <p class="muted">Este mapa es ilustrativo; se puede integrar con Google Maps, OpenStreetMap o Mapbox.</p>
+        <p class="muted">Mapa referencial (se puede integrar con Google Maps, OpenStreetMap o Mapbox).</p>
         <iframe class="map" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-72.245%2C-39.291%2C-72.200%2C-39.265&amp;layer=mapnik&amp;marker=-39.281%2C-72.220" title="Mapa de Villarrica (referencial)"></iframe>
       </div>
     </div>
@@ -342,24 +354,6 @@
     </div>
   </footer>
 
-  <!-- MODAL PRIMEROS AUXILIOS -->
-  <dialog id="firstAidModal" style="border:0; border-radius: 16px; padding:0; width:min(680px, 92vw); box-shadow: var(--shadow)">
-    <div style="padding:18px; background:#fff; border-radius:16px">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
-        <h3 style="margin:0">Primeros auxilios básicos</h3>
-        <button id="closeModal" class="btn secondary">Cerrar</button>
-      </div>
-      <div class="spacer"></div>
-      <ul style="margin:0 0 8px 18px">
-        <li>Convulsiones: retira objetos alrededor, protege la cabeza, no metas nada en su boca, cronometra el episodio.</li>
-        <li>Envenenamiento: identifica el tóxico si es posible y llama a urgencias; no provoques vómito sin indicación.</li>
-        <li>Golpe de calor: llévalo a la sombra, moja patas y abdomen con agua fresca (no helada), ventila.</li>
-        <li>Asfixia: si tose, permite que intente expulsar; si no respira, RCP para mascotas y acude de inmediato.</li>
-      </ul>
-      <p class="muted" style="margin:8px 0 0">Esta guía no reemplaza la atención profesional.</p>
-    </div>
-  </dialog>
-
   <script>
     // Año dinámico
     document.getElementById('y').textContent = new Date().getFullYear();
@@ -377,37 +371,67 @@
       });
     }));
 
-    // Modal de primeros auxilios
-    const modal = document.getElementById('firstAidModal');
-    document.getElementById('openFirstAid').addEventListener('click', () => modal.showModal());
-    document.getElementById('closeModal').addEventListener('click', () => modal.close());
-
-    // Scroll suave para anclas
+    // Smooth scroll robusto (por si el navegador no respeta scroll-behavior)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const id = a.getAttribute('href');
-        if(id.length > 1){
+        if (id.length > 1) {
           const el = document.querySelector(id);
-          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       });
     });
 
-    // Botón de instalar (placeholder)
+    // Wizard de emergencias
+    const steps = document.querySelectorAll('.step');
+    const resultBox = document.getElementById('resultBox');
+    const backBtn = document.getElementById('backBtn');
+
+    const guides = {
+      convulsiones: `• Retira objetos cercanos y protege la cabeza.<br>• No introduzcas nada en su boca.<br>• Cronometra la duración de la convulsión.<br>• Mantén un ambiente seguro y contacta de inmediato a un veterinario.`,
+      golpeCalor: `• Llévalo a la sombra o un lugar fresco.<br>• Humedece patas y abdomen con agua fresca (no helada).<br>• Usa ventilación suave.<br>• Trasládalo urgentemente a una clínica.`,
+      envenenamiento: `• Identifica el tóxico si es posible.<br>• NO provoques vómito salvo indicación veterinaria.<br>• Mantén el envase o evidencia para el veterinario.<br>• Acude inmediatamente a urgencias.`,
+      sangrado: `• Aplica presión suave con una gasa limpia sobre la herida.<br>• Mantén la presión continua hasta detener el sangrado.<br>• No retires objetos incrustados.<br>• Dirígete al veterinario lo antes posible.`,
+      asfixia: `• Si tose, permite que intente expulsar el objeto.<br>• Si no respira, revisa la boca y retira obstrucciones visibles con cuidado.<br>• Practica RCP para mascotas si es necesario.<br>• Trasládalo de inmediato a una clínica.`
+    };
+
+    document.querySelectorAll('.btn.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selected = btn.dataset.answer;
+        resultBox.innerHTML = guides[selected] || 'No hay información disponible.';
+        steps.forEach(s => s.classList.remove('active'));
+        document.querySelector('.step[data-step="2"]').classList.add('active');
+      });
+    });
+
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        steps.forEach(s => s.classList.remove('active'));
+        document.querySelector('.step[data-step="1"]').classList.add('active');
+      });
+    }
+
+    // Botón instalar (placeholder PWA)
     const installBtn = document.getElementById('installBtn');
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.disabled = false;
+      if (installBtn) installBtn.disabled = false;
     });
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      installBtn.disabled = true;
-    });
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBtn.disabled = true;
+      });
+    }
   </script>
 </body>
 </html>
+
